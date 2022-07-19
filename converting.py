@@ -10,7 +10,7 @@ import os
 df = pd.read_csv("/Users/kerri/Documents/programming/Udemy Codes/Gifs/metadata.csv")
 column_object = df['wnlemmas']
 column_captions = df['name']
-static_path = "/Users/kerri/Downloads/models-screenshots/screenshots/"
+static_path = "/Users/kerri/Desktop/models-screenshots/screenshots/"
 static_video_name = "video"
 
 video_captions = open("video_captions.csv","a")
@@ -18,7 +18,7 @@ video_captions = open("video_captions.csv","a")
 for i in range(0, column_object.shape[0]):
     try:
         element_of_first_column = df["fullId"][i]
-        if column_object[i] == 'bed':
+        if column_object[i] == 'bed' or column_object[i] == 'table':
             processed_caption = " ".join(column_captions[i].split())
             video_captions.write("video" + str(i) + ": " + processed_caption + "\n")
 
