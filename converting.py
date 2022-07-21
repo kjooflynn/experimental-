@@ -13,13 +13,24 @@ column_captions = df['name']
 static_path = "/Users/kerri/Desktop/models-screenshots/screenshots/"
 static_video_name = "video"
 
-video_captions = open("video_captions.csv","a")
+exact_caption = True # does the user wants to get exact caption
+
+if exact_caption == True:
+    video_captions = open("video_captions_exact.csv","a")
+elif exact_caption == False:
+    video_captions = open("video_captions_simple.csv","a")
 
 for i in range(0, column_object.shape[0]):
     try:
         element_of_first_column = df["fullId"][i]
         if column_object[i] == 'bed' or column_object[i] == 'table':
-            processed_caption = " ".join(column_captions[i].split())
+            if exact_caption == True:
+                processed_caption = " ".join(column_captions[i].split())
+            elif exact_caption == False:
+                if column_object[i] == 'bed':
+                    processed_caption = 'bed'
+                elif column_object[i] == 'table':
+                    processed_caption = 'table'
             video_captions.write("video" + str(i) + ": " + processed_caption + "\n")
 
             dynamic_path = element_of_first_column[4:]
